@@ -67,7 +67,7 @@ export default function Predictions() {
           </Typography>
         </Box>
         <Button
-          onClick={() => setIsPredictions(!isPredictions)}
+          onClick={() => setIsPredictions((prev) => !prev)}
           sx={{
             color: palette.grey[900],
             backgroundColor: palette.grey[700],
@@ -110,6 +110,9 @@ export default function Predictions() {
             iconType="circle"
             iconSize={8}
             height={20}
+            wrapperStyle={{
+              margin: "-10px 0 0 0",
+            }}
           />
           <Line
             type="monotone"
@@ -124,13 +127,13 @@ export default function Predictions() {
             stroke="#8884d8"
             dot={false}
           />
-          {isPredictions && (
+          {isPredictions ? (
             <Line
               strokeDasharray="5 5"
               dataKey="Predicted Revenue"
               stroke={palette.secondary[500]}
             />
-          )}
+          ) : null}
         </LineChart>
       </ResponsiveContainer>
     </DashboardBox>

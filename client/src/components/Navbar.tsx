@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Box, Typography, useTheme } from "@mui/material";
 import PixIcon from "@mui/icons-material/Pix";
 
@@ -9,6 +9,7 @@ export default function Navbar() {
   const { palette } = useTheme();
   const [selected, setSelected] = useState("");
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setSelected(pathname.slice(1));
@@ -18,7 +19,7 @@ export default function Navbar() {
     <FlexBetween mb="0.25rem" p="0.5rem 0rem" color={palette.grey[300]}>
       {/* Left Side */}
       <FlexBetween gap="0.75rem">
-        <PixIcon sx={{ fontSize: "28px" }} />
+        <PixIcon sx={{ fontSize: "28px", cursor: "pointer" }} onClick={() => navigate("/")} />
         <Typography variant="h4" fontSize="16px">
           Finanseer
         </Typography>
@@ -28,7 +29,7 @@ export default function Navbar() {
       <FlexBetween gap="2rem">
         <Box sx={{ "&:hover": { color: palette.grey[100] } }}>
           <Link
-            to="/"
+            to="/dashboard"
             style={{
               color: selected === "dashboard" ? "inherit" : palette.grey[700],
               textDecoration: "inherit",
